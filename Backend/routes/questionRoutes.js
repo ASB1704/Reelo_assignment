@@ -5,16 +5,7 @@ const {
 } = require('../models/Question');
 const express = require('express');
 const router = express.Router();
-const pdfmake = require('pdfmake');
-const fonts = {
-    Roboto: {
-        normal: 'fonts/Roboto-Regular.ttf',
-        bold: 'fonts/Roboto-Medium.ttf',
-        italics: 'fonts/Roboto-Italic.ttf',
-        bolditalics: 'fonts/Roboto-MediumItalic.ttf'
-    }
-};
-pdfmake.addFonts(fonts);
+
 
 router.post('/questions', async (req, res) => {
     console.log(req.body);
@@ -51,31 +42,23 @@ router.post('/questions', async (req, res) => {
         const numMediumQuestions = Math.floor((totalMarks * mediumPercentage / 100) / marksMedium);
         const numHardQuestions = Math.floor((totalMarks * hardPercentage / 100) / marksHard);
 
-        const easyQuestions = await questionModel.find({
-            difficulty: 'Easy',
-            topic: topic,
-        }).limit(numEasyQuestions);
+        const easyQuestions = await questionModel.aggregate([
+            { $match: { difficulty: 'Easy', topic: topic } },
+            { $sample: { size: numEasyQuestions } }
+          ]);
 
-        const mediumQuestions = await questionModel.find({
-            difficulty: 'Medium',
-            topic: topic,
-        }).limit(numMediumQuestions);
+        const mediumQuestions = await questionModel.aggregate([
+            { $match: { difficulty: 'Medium', topic: topic } },
+            { $sample: { size: numMediumQuestions } }
+          ]);
 
-        const hardQuestions = await questionModel.find({
-            difficulty: 'Hard',
-            topic: topic,
-        }).limit(numHardQuestions);
+        const hardQuestions = await questionModel.aggregate([
+            { $match: { difficulty: 'Hard', topic: topic } },
+            { $sample: { size: numHardQuestions } }
+          ]);
 
         const questions = [...easyQuestions, ...mediumQuestions, ...hardQuestions];
-        const pdfDoc = pdfmake.createPdf(questions);
-
-        // Pipe the PDF content directly to the response
-        pdfDoc.getBuffer((buffer) => {
-            res.setHeader('Content-Type', 'application/pdf');
-            res.setHeader('Content-Disposition', 'inline; filename=document.pdf');
-            res.send(buffer);
-        });
-
+       res.json(questions)
     } catch (error) {
         res.status(500).json({ message: error.message });
     }

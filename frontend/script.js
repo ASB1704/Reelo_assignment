@@ -1,16 +1,16 @@
-document.querySelector(".btn-circle-download").addEventListener("click", function() {
-    var btnCircle = document.querySelector(".btn-circle-download");
+// document.querySelector(".btn-circle-download").addEventListener("click", function() {
+//     var btnCircle = document.querySelector(".btn-circle-download");
     
-    btnCircle.classList.add("load");
+//     btnCircle.classList.add("load");
 
-    setTimeout(function() {
-        btnCircle.classList.add("done");
-    }, 1000);
+//     setTimeout(function() {
+//         btnCircle.classList.add("done");
+//     }, 1000);
 
-    setTimeout(function() {
-        btnCircle.classList.remove("load", "done");
-    }, 5000);
-});
+//     setTimeout(function() {
+//         btnCircle.classList.remove("load", "done");
+//     }, 5000);
+// });
 
 console.log('Script file loaded.');
 
@@ -33,7 +33,7 @@ function handleSubjectChange() {
         topicDropdown.appendChild(option);
     });
 
-    topicContainer.style.display = subject === 'select' ? 'none' : 'block';
+    topicContainer.style.display = subject === 'select' ? 'none' : 'flex';
 }
 
 function downloadQuestions() {
@@ -59,7 +59,9 @@ function downloadQuestions() {
         totalMarks
     };
 
-    fetch('http://localhost:3000/api/questions', {
+    uri = 'https://question-generator-api.onrender.com/api/questions'
+    // uri_dev = 'http://localhost:3000/api/questions'
+    fetch(uri, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -68,9 +70,51 @@ function downloadQuestions() {
     })
     .then(response => response.json())
     .then(data => {
+        displayQuestions(data);
         console.log('API response:', data);
     })
     .catch(error => {
         console.error('Error sending data to API:', error);
     });
 }
+
+function printDiv(divId) {
+    var printContents = document.getElementById("question-div").innerHTML;
+    var originalContents = document.body.innerHTML;
+
+    document.body.innerHTML = printContents;
+
+    window.print();
+
+    document.body.innerHTML = originalContents;
+  }
+
+  function displayQuestions(questions) {
+    const questionTable = document.getElementById('question-table');
+    const questionWrp = document.getElementById('question-wrp');
+  
+    if (!questionTable || !questionWrp) {
+      console.error('Error: Elements not found in the DOM');
+      return;
+    }
+  
+    questionTable.innerHTML = '';
+  
+    questions.forEach((question, index) => {
+      const row = document.createElement('tr');
+      const questionNumberCell = document.createElement('td');
+      const questionContentCell = document.createElement('td');
+  
+      questionNumberCell.textContent = `Q${index + 1}`;
+      questionContentCell.textContent = question.content;
+  
+      row.appendChild(questionNumberCell);
+      row.appendChild(questionContentCell);
+  
+      questionTable.appendChild(row);
+    });
+  
+    // Add the 'visible' class to make it visible
+    questionWrp.classList.add('visible');
+  }
+  

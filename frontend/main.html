@@ -6,76 +6,108 @@
     <title>Question Generator</title>
     <link rel="stylesheet" href="style.css" />
   </head>
-  <body
-    style="
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-      margin: 0;
-    "
-  >
-    <h1>Question Generator</h1>
+  <body>
+    
+    <div class="Query-wrapper">
+      <h1>Question Generator</h1>
+      <div class="form-control">
+        <label for="subject">Choose Subject:</label>
+        <select id="subject" onclick="handleSubjectChange()">
+          <option value="Physics">Physics</option>
+          <option value="Chemistry">Chemistry</option>
+          <option value="Biology">Biology</option>
+        </select>
+      </div>
 
-    <label for="subject">Choose Subject:</label>
-    <select id="subject" onchange="handleSubjectChange()">
-      <option value="Physics">Physics</option>
-      <option value="Chemistry">Chemistry</option>
-      <option value="Biology">Biology</option>
-    </select>
+      <div id="topicContainer" class="form-control" style="display: none">
+        <label for="topic">Choose Topic:</label>
+        <select id="topic"></select>
+      </div>
 
-    <div id="topicContainer" style="display: none">
-      <label for="topic">Choose Topic:</label>
-      <select id="topic"></select>
+      <div class="form-control">
+        <label for="easyPercentage">Total Marks</label>
+        <input type="number" id="totalMarks" placeholder="Total Marks" />
+      </div>
+
+      <div class="form-control">
+        <label for="easyPercentage">Easy Percentage:</label>
+        <input
+          type="number"
+          id="easyPercentage"
+          placeholder="Enter easy percentage"
+        />
+      </div>
+
+      <div class="form-control">
+        <label for="mediumPercentage">Medium Percentage:</label>
+        <input
+          type="number"
+          id="mediumPercentage"
+          placeholder="Enter medium percentage"
+        />
+      </div>
+
+      <div class="form-control">
+        <label for="hardPercentage">Hard Percentage:</label>
+        <input
+          type="number"
+          id="hardPercentage"
+          placeholder="Enter hard percentage"
+        />
+      </div>
+
+      <div class="form-control">
+        <label for="marksEasy">Marks per Question in Easy:</label>
+        <input
+          type="number"
+          id="marksEasy"
+          placeholder="Enter marks for easy questions"
+        />
+      </div>
+
+      <div class="form-control">
+        <label for="marksMedium">Marks per Question in Medium:</label>
+        <input
+          type="number"
+          id="marksMedium"
+          placeholder="Enter marks for medium questions"
+        />
+      </div>
+
+      <div class="form-control">
+        <label for="marksHard">Marks per Question in Hard:</label>
+        <input
+          type="number"
+          id="marksHard"
+          placeholder="Enter marks for hard questions"
+        />
+      </div>
+      
+      <button onclick="downloadQuestions()">Generate</button>
     </div>
-    <label for="easyPercentage">Total Marks</label>
-    <input type="number" id="totalMarks" placeholder="Total Marks" />
 
-    <label for="easyPercentage">Easy Percentage:</label>
-    <input
-      type="number"
-      id="easyPercentage"
-      placeholder="Enter easy percentage"
-    />
+    <div id="question-wrp">
+      <div id="question-div">
+        <button onclick="printDiv('question-wrp')">Print</button>
 
-    <label for="mediumPercentage">Medium Percentage:</label>
-    <input
-      type="number"
-      id="mediumPercentage"
-      placeholder="Enter medium percentage"
-    />
+        <table id="question-table">
+          <thead>
+            <tr>
+              <th>Question</th>
+              <th>Content</th>
+            </tr>
+          </thead>
+          <tbody id="question-body">
+            <!-- Questions will be dynamically added here -->
+          </tbody>
+        </table>
+      </div>
 
-    <label for="hardPercentage">Hard Percentage:</label>
-    <input
-      type="number"
-      id="hardPercentage"
-      placeholder="Enter hard percentage"
-    />
+    <script src="script.js"></script>
+  </body>
+</html>
 
-    <label for="marksEasy">Marks per Question in Easy:</label>
-    <input
-      type="number"
-      id="marksEasy"
-      placeholder="Enter marks for easy questions"
-    />
-
-    <label for="marksMedium">Marks per Question in Medium:</label>
-    <input
-      type="number"
-      id="marksMedium"
-      placeholder="Enter marks for medium questions"
-    />
-
-    <label for="marksHard">Marks per Question in Hard:</label>
-    <input
-      type="number"
-      id="marksHard"
-      placeholder="Enter marks for hard questions"
-    />
-
-    <div class="btn-circle-download" onclick="downloadQuestions()">
-      <svg id="arrow" width="14px" height="20px" viewBox="17 14 14 20">
+<!--  <svg id="arrow" width="14px" height="20px" viewBox="17 14 14 20">
         <path d="M24,15 L24,32"></path>
         <polyline points="30 27 24 33 18 27"></polyline>
       </svg>
@@ -86,9 +118,4 @@
         <path
           d="M24,1 L24,1 L24,1 C36.7025492,1 47,11.2974508 47,24 L47,24 L47,24 C47,36.7025492 36.7025492,47 24,47 L24,47 L24,47 C11.2974508,47 1,36.7025492 1,24 L1,24 L1,24 C1,11.2974508 11.2974508,1 24,1 L24,1 Z"
         ></path>
-      </svg>
-    </div>
-    <script src="script.js"></script>
-  </body>
-  </html>
-  
+      </svg> -->

@@ -1,10 +1,60 @@
-html, body {
-  height: 100%;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
-  display: grid;
-  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 2rem;
+}
+body .Query-wrapper {
+  border: 1px solid rgb(180, 177, 177);
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  width: 100%;
+  max-width: 30rem;
+  padding: 1rem;
+  border-radius: 5px;
+}
+body .Query-wrapper .form-control {
+  display: flex;
+  justify-content: space-between;
+}
+body #question-wrp {
+  display: none;
+}
+body #question-wrp button {
+  margin-top: 1rem;
+  margin-left: 50%;
+}
+body #question-wrp.visible {
+  border: 1px solid rgb(180, 177, 177);
+  height: 50vh;
+  overflow: scroll;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+body #question-wrp.visible::-webkit-scrollbar {
+  display: none;
+}
+body #question-wrp.visible table {
+  margin-top: 20px;
+  padding: 2rem;
+}
+body #question-wrp.visible table th,
+body #question-wrp.visible table td {
+  border: 1px solid #817a7a;
+  padding: 8px;
+  text-align: left;
+}
+body #question-wrp.visible table th {
+  background-color: #8a8080;
 }
 
 .btn-circle-download {
@@ -13,7 +63,7 @@ body {
   width: 48px;
   margin: auto;
   border-radius: 100%;
-  background: #E8EAED;
+  background: #e8eaed;
   cursor: pointer;
   overflow: hidden;
   transition: all 0.2s ease;
@@ -46,7 +96,7 @@ body {
   position: absolute;
   top: 14px;
   left: 17px;
-  stroke: #9098A9;
+  stroke: #9098a9;
   transition: all 0.2s ease;
 }
 .btn-circle-download svg#check {
@@ -61,22 +111,22 @@ body {
 }
 .btn-circle-download:hover #arrow path,
 .btn-circle-download:hover #arrow polyline {
-  stroke: #0077FF;
+  stroke: #0077ff;
 }
 .btn-circle-download.load {
   background: rgba(0, 119, 255, 0.2);
 }
 .btn-circle-download.load #arrow path,
 .btn-circle-download.load #arrow polyline {
-  stroke: #0077FF;
+  stroke: #0077ff;
 }
 .btn-circle-download.load #border {
-  stroke: #0077FF;
+  stroke: #0077ff;
   stroke-dasharray: 144;
   stroke-dashoffset: 0;
 }
 .btn-circle-download.done {
-  background: #0077FF;
+  background: #0077ff;
   animation: rubberBand 0.8s;
 }
 .btn-circle-download.done:after {
@@ -116,20 +166,4 @@ body {
   to {
     transform: scale3d(1, 1, 1);
   }
-}
-.credit {
-  position: fixed;
-  right: 20px;
-  bottom: 20px;
-  transition: all 0.2s ease;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-       user-select: none;
-  opacity: 0.6;
-}
-.credit img {
-  width: 72px;
-}
-.credit:hover {
-  transform: scale(0.95);
 }/*# sourceMappingURL=style.css.map */

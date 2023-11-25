@@ -1,24 +1,83 @@
-$color: #0077FF;
+$color: #0077ff;
 
-html, body {
-  height: 100%;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
-  display: grid;
-  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 2rem;
+
+  .Query-wrapper {
+    border: 1px solid rgb(180, 177, 177);
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    width: 100%;
+    max-width: 30rem;
+    padding: 1rem;
+    border-radius: 5px;
+
+    .form-control {
+      display: flex;
+      justify-content: space-between;
+    }
+  }
+
+  #question-wrp {
+    display: none;
+    button {
+      margin-top: 1rem;
+      margin-left: 50%;
+    }
+    &.visible {
+      border: 1px solid rgb(180, 177, 177);
+
+      height: 50vh;
+      overflow: scroll;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      &::-webkit-scrollbar {
+        display: none;
+      }
+
+      table {
+        margin-top: 20px;
+        padding: 2rem;
+
+        th,
+        td {
+          border: 1px solid #817a7a;
+          padding: 8px;
+          text-align: left;
+        }
+
+        th {
+          background-color: #8a8080;
+        }
+      }
+    }
+  }
 }
 
+// download btn css
 .btn-circle-download {
   position: relative;
   height: 48px;
   width: 48px;
   margin: auto;
   border-radius: 100%;
-  background: #E8EAED;
+  background: #e8eaed;
   cursor: pointer;
   overflow: hidden;
-  transition: all .2s ease;
+  transition: all 0.2s ease;
 
   &:after {
     content: "";
@@ -26,7 +85,12 @@ body {
     display: block;
     width: 200%;
     height: 100%;
-    background-image: linear-gradient(100deg, rgba(255,255,255,0), rgba(255,255,255,.25),rgba(255,255,255,0));
+    background-image: linear-gradient(
+      100deg,
+      rgba(255, 255, 255, 0),
+      rgba(255, 255, 255, 0.25),
+      rgba(255, 255, 255, 0)
+    );
     transform: translateX(-100%);
   }
 
@@ -43,15 +107,15 @@ body {
       stroke: none;
       stroke-dasharray: 144;
       stroke-dashoffset: 144;
-      transition: all .9s linear;
+      transition: all 0.9s linear;
     }
 
     &#arrow {
       position: absolute;
       top: 14px;
       left: 17px;
-      stroke: #9098A9;
-      transition: all .2s ease;
+      stroke: #9098a9;
+      transition: all 0.2s ease;
     }
 
     &#check {
@@ -64,7 +128,7 @@ body {
   }
 
   &:hover {
-    background: rgba($color, .2);
+    background: rgba($color, 0.2);
 
     #arrow {
       path,
@@ -75,7 +139,7 @@ body {
   }
 
   &.load {
-    background: rgba($color, .2);
+    background: rgba($color, 0.2);
 
     #arrow {
       path,
@@ -93,12 +157,12 @@ body {
 
   &.done {
     background: $color;
-    animation: rubberBand .8s;
+    animation: rubberBand 0.8s;
 
     &:after {
       transform: translateX(50%);
-      transition: transform .4s ease;
-      transition-delay: .7s;
+      transition: transform 0.4s ease;
+      transition-delay: 0.7s;
     }
 
     #border,
@@ -108,12 +172,11 @@ body {
 
     #check {
       transform: scale(1);
-      transition: all .2s ease;
-      transition-delay: .2s;
+      transition: all 0.2s ease;
+      transition-delay: 0.2s;
     }
   }
 }
-
 @keyframes rubberBand {
   from {
     transform: scale(1, 1, 1);
@@ -125,17 +188,15 @@ body {
     transform: scale3d(0.75, 1.15, 1);
   }
   50% {
-    transform: scale3d(1.10, 0.85, 1);
+    transform: scale3d(1.1, 0.85, 1);
   }
   65% {
-    transform: scale3d(.95, 1.05, 1);
+    transform: scale3d(0.95, 1.05, 1);
   }
   75% {
-    transform: scale3d(1.05, .95, 1);
+    transform: scale3d(1.05, 0.95, 1);
   }
   to {
     transform: scale3d(1, 1, 1);
   }
 }
-
-
